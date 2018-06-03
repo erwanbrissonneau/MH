@@ -32,6 +32,7 @@ var ListBody = {
 			var armor = BODYS[i];
 			var ligne = document.createElement("li");
 			var el = document.createElement("span");
+			el.style.cursor = 'pointer';
 			if(ListBody.selectIdx != null && ListBody.selectIdx == i)
 				el.style.color = 'red';
 			el.appendChild(document.createTextNode(armor.name));
