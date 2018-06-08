@@ -14,13 +14,24 @@ var ListBody = {
 		ListBody.actualiser();
 	},
 	close : function(){
+		if(!ListBody.isOpen)
+			return;
 		ListBody.isOpen = false;
-		document.getElementById("eastRegion").removeChild(ListBody.instance);
+		
+		var eastRegion = document.getElementById("eastRegion")
+		while (eastRegion.firstChild) {
+			eastRegion.removeChild(eastRegion.firstChild);
+		}
+		
 		ListBody.instance = null;
 	},
 	actualiser : function(){
-		if(ListBody.instance != null)
-			document.getElementById("eastRegion").removeChild(ListBody.instance);
+		
+		var eastRegion = document.getElementById("eastRegion")
+		while (eastRegion.firstChild) {
+			eastRegion.removeChild(eastRegion.firstChild);
+		}
+		
 		var list = document.createElement("div");
 		ListBody.instance = list;
 		list.appendChild(ListBody.getHtmlList());
@@ -67,6 +78,12 @@ var ListBody = {
 		return list;
 	},
 	select : function(index){
+		var topHeadRegion = document.getElementById("topBodyRegion");
+		while (topHeadRegion.firstChild) {
+			topHeadRegion.removeChild(topHeadRegion.firstChild);
+		}
+		topHeadRegion.appendChild(document.createTextNode(BODYS[index].name));
+		
 		ListBody.selectIdx = index;
 		ListBody.actualiser();
 	}

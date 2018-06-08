@@ -30,11 +30,91 @@
 
 </head>
 <body>
-<button type="button" onclick="ListHead.doShow()">selection de la head</button>
-<button type="button" onclick="ListBody.doShow()">selection du boy</button>
-<button type="button" onclick="ListArms.doShow()">selection des arms</button>
-<button type="button" onclick="ListWaist.doShow()">selection du waist</button>
-<button type="button" onclick="ListLegs.doShow()">selection des legs</button>
+<script>
+var showSkill = function(){
+	var skills = [];
+	var nbPoints = [];
+	var head = HEAD[ListHead.selectIdx];
+	for(var i = 0 ; i < head.skills.length ; i++){
+		alimSkill(skills, nbPoints, head.skills[i], head.skillsNb[i]);
+	}
+		
+	var body = BODYS[ListBody.selectIdx];	
+	for(var i = 0 ; i < body.skills.length ; i++){
+		alimSkill(skills, nbPoints, body.skills[i], body.skillsNb[i]);
+	}
+	
+	var arms = ARMS[ListArms.selectIdx];	
+	for(var i = 0 ; i < arms.skills.length ; i++){
+		alimSkill(skills, nbPoints, arms.skills[i], arms.skillsNb[i]);
+	}
+	
+	var waist = WAIST[ListWaist.selectIdx];	
+	for(var i = 0 ; i < waist.skills.length ; i++){
+		alimSkill(skills, nbPoints, waist.skills[i], waist.skillsNb[i]);
+	}
+	
+	var legs = LEGS[ListLegs.selectIdx];
+	for(var i = 0 ; i < legs.skills.length ; i++){
+		alimSkill(skills, nbPoints, legs.skills[i], legs.skillsNb[i]);
+	}
+
+	var centerRegion = document.getElementById("centerRegion");
+	while (centerRegion.firstChild) {
+		centerRegion.removeChild(centerRegion.firstChild);
+	}
+	var list = document.createElement("lu");
+	for(var i = 0 ; i < skills.length ; i++){
+		var skill = skills[i];
+		var nbPoint = nbPoints[i];
+		var ligne = document.createElement("li");
+		var el = document.createElement("span");
+		el.style.cursor = 'pointer';
+		if(nbPoint > skill.points)
+			el.style.color = 'red';
+		el.appendChild(document.createTextNode(skill.name));
+		ligne.appendChild(el);
+		list.appendChild(ligne);
+	}
+	centerRegion.appendChild(list);
+}
+var alimSkill = function(skills, nbPoints, skill, nbPoint){
+	var idx = -1;
+	for(var i = 0 ; i < skills.length ; i++){
+		if(skills[i].id = skill.id){
+			idx = i;
+			break;
+		}
+	}
+	if(idx = -1){
+		skills.push(skill);
+		nbPoints.push(nbPoint);
+	}else{
+		nbPoints[i] = nbPoints[i] + nbPoint;
+	}
+		
+}
+</script>
+<div id="topRegion">
+<span id="topHeadRegion"></span>
+<span> | </span>
+<span id="topBodyRegion"></span>
+<span> | </span>
+<span id="topArmsRegion"></span>
+<span> | </span>
+<span id="topWaistRegion"></span>
+<span> | </span>
+<span id="topLegsRegion"></span>
+</div>
+<button type="button" onclick="ListBody.close();	ListArms.close();	ListWaist.close();	ListLegs.close();	ListHead.doShow()">selection de la head</button>
+<button type="button" onclick="ListHead.close();	ListArms.close();	ListWaist.close();	ListLegs.close();	ListBody.doShow()">selection du boy</button>
+<button type="button" onclick="ListHead.close();	ListBody.close();	ListWaist.close();	ListLegs.close();	ListArms.doShow()">selection des arms</button>
+<button type="button" onclick="ListHead.close();	ListBody.close();	ListArms.close();	ListLegs.close();	ListWaist.doShow()">selection du waist</button>
+<button type="button" onclick="ListHead.close();	ListBody.close();	ListArms.close();	ListWaist.close();	ListLegs.doShow()">selection des legs</button>
 <div id="eastRegion"></div>
+<button type="button" onclick="showSkill();">Voir les skills</button>
+
+<div id="centerRegion">
+</div>
 </body>
 </html>
