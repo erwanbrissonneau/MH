@@ -82,7 +82,7 @@ var ListBody = {
 		while (topHeadRegion.firstChild) {
 			topHeadRegion.removeChild(topHeadRegion.firstChild);
 		}
-		topHeadRegion.appendChild(document.createTextNode(BODYS[index].name));
+		topHeadRegion.appendChild(document.createTextNode(SKILLS[index].name));
 		
 		ListBody.selectIdx = index;
 		ListBody.actualiser();

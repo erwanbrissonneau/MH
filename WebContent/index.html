@@ -81,12 +81,12 @@ var showSkill = function(){
 var alimSkill = function(skills, nbPoints, skill, nbPoint){
 	var idx = -1;
 	for(var i = 0 ; i < skills.length ; i++){
-		if(skills[i].id = skill.id){
+		if(skills[i].id == skill.id){
 			idx = i;
 			break;
 		}
 	}
-	if(idx = -1){
+	if(idx == -1){
 		skills.push(skill);
 		nbPoints.push(nbPoint);
 	}else{
